@@ -18,8 +18,6 @@ public class Drivetrain extends SubsystemBase {
   private TalonFX leftBack;
   private TalonFX rightFront;
   private TalonFX rightBack;
-  private double lastTime;
-  private double integral;
   private double kWheelCircumference = 6 * Math.PI;
   private double kTicksPerRotation = 2048;
   private double kGearRatio = 12.78;
@@ -41,13 +39,11 @@ public class Drivetrain extends SubsystemBase {
   }
 
   public void resetEncoders() {
-    leftBack.setSelectedSensorPosition(0);
-    leftFront.setSelectedSensorPosition(0);
-    rightBack.setSelectedSensorPosition(0);
-    rightFront.setSelectedSensorPosition(0);
+    // reset the encoders by using setSelectedSensorPosition
   }
 
   public void setSpeeds(double speed) {
+    // set the speeds of the motors
     leftFront.set(ControlMode.PercentOutput, speed);
     rightFront.set(ControlMode.PercentOutput, speed);
   }
@@ -59,8 +55,6 @@ public class Drivetrain extends SubsystemBase {
 
   /** Log the motor's percent output to Smart Dashboard. */
   public void log() {
-    SmartDashboard.putNumber("Position", getPosition());
-    SmartDashboard.putNumber("Ouptut", leftBack.getMotorOutputPercent());
   }
 
   @Override
@@ -70,13 +64,12 @@ public class Drivetrain extends SubsystemBase {
   }
 
   public double getPosition() {
-    return ticksToMeters(leftFront.getSelectedSensorPosition());
+    // use ticksToMeters to get the position
+    return 0;
   }
 
+  // unit conversions from ticks to meters
   public  double ticksToMeters(double ticks) {
-    double rotations = ticks / kTicksPerRotation;
-    double wheelRotations = rotations / kGearRatio;
-    double meters = wheelRotations * Units.inchesToMeters(kWheelCircumference);
-    return meters;
+    return 0;
   }
 }
